@@ -21,7 +21,7 @@ import java.util.List;
 public class OrderController {
     private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
     private final RestTemplate restTemplate;
-    private final String inventoryServiceUrl = "http://localhost:8081";
+    private final String inventoryServiceUrl = "http://localhost:8081/api/v1/inventory/reserve";
 
     public OrderController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
