@@ -1,0 +1,13 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: order
+  namespace: order
+spec:
+  destination:
+    name: order
+    namespace: order
+  sources:
+    - name: api-gw-demo-app
+      namespace: consul
+      action: allow
