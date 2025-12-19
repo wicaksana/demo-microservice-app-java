@@ -15,4 +15,3 @@ docker run --rm -it \
   muarwi/order-service
 
 ```
-spring.http.client.service.group.inventory.base-url

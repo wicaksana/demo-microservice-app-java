@@ -8,7 +8,7 @@ public class InventoryReservationResponse {
     }
 
     public InventoryReservationResponse(String status, String message) {
-        this.status = status;  // SUCCESS, OUT_OF_STOCK
+        this.status = status;  // SUCCESS, OUT_OF_STOCK, NOT_FOUND
         this.message = message;
     }
 

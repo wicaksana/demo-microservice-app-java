@@ -7,7 +7,7 @@ plugins {
 
 group = 'id.wicaksana'
 version = '0.0.1-SNAPSHOT'
-description = 'Order service'
+description = 'Inventory service'
 
 java {
 	toolchain {
