@@ -1,0 +1,29 @@
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: order
+  namespace: sit
+spec:
+  destination:
+    name: order
+    namespace: sit
+  sources:
+    - name: api-gw-demo-app
+      namespace: consul
+      action: allow
+---
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceIntentions
+metadata:
+  name: order
+  namespace: dev
+spec:
+  destination:
+    name: order
+    namespace: dev
+  sources:
+    - name: api-gw-demo-app
+      namespace: consul
+      action: allow
+---

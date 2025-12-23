@@ -1,0 +1,25 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: httproute-order-failover
+  namespace: consul
+spec:
+  parentRefs:
+  - name: api-gw-demo-app
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /failover/
+    backendRefs:
+    - kind: Service
+      name: order
+      namespace: sit
+      port: 8080
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          replacePrefixMatch: /
+          type: ReplacePrefixMatch
+

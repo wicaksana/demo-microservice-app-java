@@ -1,0 +1,14 @@
+apiVersion: consul.hashicorp.com/v1alpha1
+kind: ServiceResolver
+metadata:
+  name: order
+  namespace: sit
+spec:
+  connectTimeout: 3s
+  requestTimeout: 5s
+  failover:
+    '*':
+      targets:
+        - service: order 
+          namespace: dev
+
