@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: inventory
-  namespace: inventory2
+  namespace: inventory
   labels:
     app: inventory
 spec:
@@ -19,7 +19,7 @@ apiVersion: consul.hashicorp.com/v1alpha1
 kind: ServiceDefaults
 metadata:
   name: inventory
-  namespace: inventory2
+  namespace: inventory
 spec:
   protocol: "http"
 ---
@@ -27,14 +27,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: inventory
-  namespace: inventory2
+  namespace: inventory
 automountServiceAccountToken: true
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inventory
-  namespace: inventory2
+  namespace: inventory
   labels:
     app: inventory
 spec:

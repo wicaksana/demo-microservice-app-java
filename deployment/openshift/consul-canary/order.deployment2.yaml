@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-v2
+  namespace: order
+  labels:
+    app: order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+      annotations:
+        consul.hashicorp.com/connect-inject: "true"
+        consul.hashicorp.com/transparent-proxy: "true"
+        consul.hashicorp.com/service-meta-version: "v2"
+        consul.hashicorp.com/service-tags: "v2"
+        k8s.v1.cni.cncf.io/networks: '[{"name":"consul-cni"}]'
+    spec:
+      serviceAccountName: order
+      containers:
+        - name: order
+          image: muarwi/order-service:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          env:
+            - name: APP_API_VERSION
+              value: v2
+            - name: SPRING_HTTP_CLIENT_SERVICE_GROUP_INVENTORY_BASEURL
+              value: http://inventory.virtual.inventory.ns.consul:8081
+            # - name: SERVER_TOMCAT_ACCESSLOG_ENABLED
+            #   value: "true"
+            # - name: SERVER_TOMCAT_ACCESSLOG_DIRECTORY
+            #   value: /dev 
+            # - name: SERVER_TOMCAT_ACCESSLOG_PREFIX
+            #   value: stdout 
+            # - name: SERVER_TOMCAT_ACCESSLOG_BUFFERED
+            #   value: "false"
