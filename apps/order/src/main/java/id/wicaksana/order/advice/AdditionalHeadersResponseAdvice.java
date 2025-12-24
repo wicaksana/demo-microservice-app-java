@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @RestControllerAdvice
-public class VersioningResponseAdvice implements ResponseBodyAdvice<Object> {
+public class AdditionalHeadersResponseAdvice implements ResponseBodyAdvice<Object> {
     @Value("${app.api.version:v1.0}")
     private String apiVersion;
+    @Value("${app.location:DC1}")
+    private String location;
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -29,6 +31,7 @@ public class VersioningResponseAdvice implements ResponseBodyAdvice<Object> {
                                             ServerHttpRequest request, ServerHttpResponse response) {
         // add version to the HTTP Header
         response.getHeaders().add("X-API-Version", apiVersion);
+        response.getHeaders().add("X-API-Location", location);
         return body;
     }
 }
