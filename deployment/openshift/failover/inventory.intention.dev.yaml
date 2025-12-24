@@ -3,18 +3,13 @@ apiVersion: consul.hashicorp.com/v1alpha1
 kind: ServiceIntentions
 metadata:
   name: inventory
-  namespace: inventory
+  namespace: dev
 spec:
   destination:
     name: inventory
-    namespace: inventory
+    namespace: dev
   sources:
-    - name: order
-      namespace: order
-      action: allow
     - name: order
       namespace: dev
       action: allow
-    - name: order
-      namespace: sit
-      action: allow
+

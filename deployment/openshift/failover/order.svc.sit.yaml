@@ -49,8 +49,8 @@ spec:
       annotations:
         consul.hashicorp.com/connect-inject: "true"
         consul.hashicorp.com/transparent-proxy: "true"
-        consul.hashicorp.com/service-meta-version: "sit"
-        consul.hashicorp.com/service-tags: "sit"
+        consul.hashicorp.com/service-meta-version: "v1"
+        consul.hashicorp.com/service-tags: "v1"
         k8s.v1.cni.cncf.io/networks: '[{"name":"consul-cni"}]'
     spec:
       serviceAccountName: order
@@ -76,9 +76,11 @@ spec:
             failureThreshold: 3
           env:
             - name: APP_API_VERSION
+              value: v1
+            - name: APP_LOCATION
               value: sit
             - name: SPRING_HTTP_CLIENT_SERVICE_GROUP_INVENTORY_BASEURL
-              value: http://inventory.virtual.inventory.ns.consul:8081
+              value: http://inventory.virtual.sit.ns.consul:8081
             # - name: SERVER_TOMCAT_ACCESSLOG_ENABLED
             #   value: "true"
             # - name: SERVER_TOMCAT_ACCESSLOG_DIRECTORY

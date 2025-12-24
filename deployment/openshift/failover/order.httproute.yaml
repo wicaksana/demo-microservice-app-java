@@ -16,6 +16,12 @@ spec:
       name: order
       namespace: sit
       port: 8080
+      weight: 100
+    - kind: Service
+      name: order
+      namespace: dev
+      port: 8080
+      weight: 0
     filters:
     - type: URLRewrite
       urlRewrite:
