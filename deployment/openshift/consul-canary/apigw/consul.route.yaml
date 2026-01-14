@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: route-consul-api-gw
+  namespace: consul 
+spec:
+  # Default format: http[s]://<route-service-name>.<application-subdomain>.<cluster-hosted-zone>
+  host: demo-app.wicaksana.uk
+  port:
+    targetPort: 8080 
+  to:
+    kind: Service
+    name: api-gw-demo-app

@@ -1,7 +1,7 @@
 #/bin/sh
 set +x
 
-APP_URL="https://demo-app.wicaksana.uk/canary2/api/v1/order"
+APP_URL="http://demo-app.wicaksana.uk/canary2/api/v1/order"
 echo $APP_URL
 for i in `seq 1 10`; 
     do echo -n "$i. " \
